@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Science | Exploring Forces & Motion</title>
+    <style>
+        :root {
+            --primary-color: #f59e0b;
+            --primary-hover: #d97706;
+            --bg-color: #f8fafc;
+            --sidebar-bg: #0f172a;
+            --sidebar-text: #94a3b8;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --heading-color: #0f172a;
+            --accent-green: #10b981;
+            --accent-blue: #0284c7;
+            --accent-purple: #8b5cf6;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 270px;
+            background-color: var(--sidebar-bg);
+            color: white;
+            padding: 2rem 1rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        aside h2 {
+            font-size: 1.25rem;
+            color: #f8fafc;
+            margin-bottom: 0.25rem;
+        }
+
+        aside p.subtitle {
+            font-size: 0.85rem;
+            color: var(--sidebar-text);
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 0.4rem;
+        }
+
+        nav a {
+            color: var(--sidebar-text);
+            text-decoration: none;
+            display: block;
+            padding: 0.6rem 0.85rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 270px;
+            width: calc(100% - 270px);
+            padding: 2.5rem 3rem;
+            max-width: 1100px;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            color: var(--heading-color);
+            margin-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--heading-color);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #fef3c7;
+            color: #b45309;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.25rem 0;
+            width: 100%;
+        }
+
+        .info-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.25rem;
+            border-radius: 6px;
+        }
+
+        .interactive-box {
+            background-color: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        textarea, input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Arcade Sorting Game */
+        .arcade-box {
+            background: #0f172a;
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .arcade-card {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fef08a;
+            margin: 1.25rem 0;
+            min-height: 50px;
+        }
+
+        .arcade-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-sort {
+            background: #334155;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem;
+        }
+
+        .btn-sort:hover {
+            background: var(--primary-color);
+        }
+
+        /* Net Force Tug-of-War Visualizer */
+        .tug-arena {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tug-block {
+            width: 80px;
+            height: 60px;
+            background: #f59e0b;
+            border-radius: 6px;
+            position: absolute;
+            transition: left 0.4s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .force-arrow {
+            position: absolute;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .hidden { display: none; }
+
+        @media (max-width: 850px) {
+            body { flex-direction: column; }
+            aside { width: 100%; height: auto; position: relative; }
+            main { margin-left: 0; width: 100%; padding: 1.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <h2>Grade 7 Science</h2>
+        <p class="subtitle">Unit: Form, Function &amp; Forces</p>
+        <nav>
+            <ul>
+                <li><a href="#warmup" class="active">1. Warm-Up Concepts</a></li>
+                <li><a href="#arcade">2. Force Sorter Arcade</a></li>
+                <li><a href="#netforce">3. Net Force Simulation</a></li>
+                <li><a href="#worksheet">4. Scenario Lab Sheet</a></li>
+                <li><a href="#exitticket">5. Exit Ticket</a></li>
+                <li><a href="grade7-landing.html" style="margin-top:2rem; background:#334155; color:white;">⬅️ Back to Grade 7</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <!-- Phase 1: Warm-Up & Foundations -->
+        <section id="warmup">
+            <span class="badge">Phase 1 • 8 Minutes</span>
+            <h1>What Are Forces? ⚙️</h1>
+            <p>In science, a <strong>force</strong> is simply a <strong>push or a pull</strong> acting upon an object. Forces are measured in units called <strong>Newtons (N)</strong>. Whenever an interaction stops, the objects no longer experience the force.</p>
+
+            <div class="grid-2">
+                <div class="info-card">
+                    <h3>Push vs. Pull</h3>
+                    <p><strong>Push:</strong> Applying force to move an object <em>away</em> from you (e.g., closing a door, kicking a soccer ball).</p>
+                    <p><strong>Pull:</strong> Applying force to bring an object <em>closer</em> to you (e.g., pulling a wagon, opening a drawer).</p>
+                </div>
+
+                <div class="info-card" style="border-left-color: var(--accent-blue);">
+                    <h3>Applied vs. Non-Contact Forces</h3>
+                    <p><strong>Applied Force ($F_a$):</strong> A direct contact force where a person or another object pushes or pulls an object.</p>
+                    <p><strong>Non-Contact Force:</strong> A force applied without physical contact between objects (e.g., gravity pulling down an apple, magnetic attraction).</p>
+                </div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>Quick Warm-Up Check</h3>
+                <label for="check-q1"><strong>Which of the following is an example of an Applied Force?</strong></label>
+                <select id="check-q1">
+                    <option value="">-- Choose an Option --</option>
+                    <option value="wrong1">Earth's gravity pulling on your pencil</option>
+                    <option value="correct">A student pushing a heavy textbook across their desk</option>
+                    <option value="wrong2">A compass needle pointing North due to Earth's magnetic field</option>
+                </select>
+                <button onclick="checkWarmUp()">Check Answer</button>
+                <p id="warmup-fb" style="margin-top: 0.5rem; font-weight: bold;"></p>
+            </div>
+        </section>
+
+        <!-- Phase 2: Contact vs Non-Contact Arcade -->
+        <section id="arcade">
+            <span class="badge">Phase 2 • 10 Minutes</span>
+            <h2>Arcade: Contact vs. Non-Contact Sorter 🎮</h2>
+            <p>Sort each force scenario as either a <strong>Contact Force</strong> (objects physically touch) or a <strong>Non-Contact Force</strong> (acting across empty space).</p>
+
+            <div class="arcade-box">
+                <p style="color: #94a3b8; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Classify the following force:</p>
+                <div class="arcade-card" id="arcade-scenario">Loading scenario...</div>
+
+                <div class="arcade-btns">
+                    <button class="btn-sort" onclick="sortForce('Contact')">🤝 Contact Force</button>
+                    <button class="btn-sort" onclick="sortForce('Non-Contact')">🧲 Non-Contact Force</button>
+                </div>
+
+                <p style="margin-top: 1.5rem;">Score: <span id="arcade-score">0</span> / 6</p>
+                <p id="arcade-fb" style="margin-top: 0.5rem; font-weight: bold;"></p>
+            </div>
+        </section>
+
+        <!-- Phase 3: Push Your Thinking - Net Force Simulator -->
+        <section id="netforce">
+            <span class="badge">Phase 3 • 12 Minutes</span>
+            <h2>Push Your Thinking: Balanced vs. Unbalanced Forces ⚖️</h2>
+            <p>Objects rarely experience only one force. The combination of all forces acting on an object is called the <strong>Net Force ($F_{net}$)</strong>.</p>
+            
+            <div class="grid-2">
+                <div class="info-card" style="border-left-color: var(--accent-green);">
+                    <h3>Balanced Forces ($F_{net} = 0\text{ N}$)</h3>
+                    <p>Forces pulling in opposite directions with <em>equal strength</em> cancel each other out. <strong>Result:</strong> No change in motion (object stays still or continues at constant velocity).</p>
+                </div>
+                <div class="info-card" style="border-left-color: #ef4444;">
+                    <h3>Unbalanced Forces ($F_{net} > 0\text{ N}$)</h3>
+                    <p>One force is stronger than the opposing force. <strong>Result:</strong> The object accelerates in the direction of the stronger force.</p>
+                </div>
+            </div>
+
+            <!-- Tug of War Sim -->
+            <div class="interactive-box">
+                <h3>Interactive Tug-of-War Visualizer</h3>
+                <p>Adjust the forces applied to the crate by Team Left and Team Right:</p>
+
+                <div class="grid-2">
+                    <div>
+                        <label for="force-left"><strong>Team Left Pull (Newtons):</strong></label>
+                        <input type="number" id="force-left" value="50" min="0" max="200" step="10">
+                    </div>
+                    <div>
+                        <label for="force-right"><strong>Team Right Pull (Newtons):</strong></label>
+                        <input type="number" id="force-right" value="50" min="0" max="200" step="10">
+                    </div>
+                </div>
+
+                <button onclick="calculateNetForce()">Calculate Net Force &amp; Test Movement</button>
+
+                <div class="tug-arena">
+                    <span style="position: absolute; left: 20px; color: #94a3b8; font-weight: bold;">⬅️ LEFT TEAM</span>
+                    <div class="tug-block" id="tug-box" style="left: calc(50% - 40px);">CRATE</div>
+                    <span style="position: absolute; right: 20px; color: #94a3b8; font-weight: bold;">RIGHT TEAM ➡️</span>
+                </div>
+
+                <div id="tug-result" style="background: white; padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                    <p><strong>Net Force ($F_{net}$):</strong> <span id="fnet-display">0 N (Balanced)</span></p>
+                    <p><strong>Motion Outcome:</strong> <span id="fnet-outcome">The crate remains completely stationary.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4: Digital Worksheet & Scenario Solver -->
+        <section id="worksheet">
+            <span class="badge">Phase 4 • 10 Minutes</span>
+            <h2>Digital Scenario Solver 📝</h2>
+            <p>Analyze each real-world diagram scenario and identify all forces acting on the objects:</p>
+
+            <div class="interactive-box">
+                <h3>Scenario A: A Book Resting on a Flat Table</h3>
+                <p><em>A textbook sits completely still on a classroom desk.</em></p>
+                <label for="scen-a"><strong>Which two opposing forces are acting on the book to keep it balanced?</strong></label>
+                <select id="scen-a">
+                    <option value="">-- Select Opposing Forces --</option>
+                    <option value="correct">Gravity pulling downward &amp; Normal force pushing upward</option>
+                    <option value="wrong1">Friction pulling left &amp; Applied force pushing right</option>
+                    <option value="wrong2">Air resistance pushing downward &amp; Magnetic force pushing upward</option>
+                </select>
+                <button onclick="checkScenA()">Check Scenario A</button>
+                <p id="scen-a-fb" style="margin-top: 0.5rem; font-weight: bold;"></p>
+            </div>
+
+            <div class="interactive-box">
+                <h3>Scenario B: A Skydiver Falling Before Opening Parachute</h3>
+                <p><em>A skydiver jumps from a plane and speeds up as they fall downward through the air.</em></p>
+                <label for="scen-b"><strong>Are the forces acting on the falling skydiver balanced or unbalanced? Why?</strong></label>
+                <select id="scen-b">
+                    <option value="">-- Select Explanation --</option>
+                    <option value="wrong">Balanced, because air resistance equals gravity.</option>
+                    <option value="correct">Unbalanced, because downward gravity is stronger than upward air resistance, causing acceleration.</option>
+                    <option value="wrong2">There are zero forces acting on the skydiver in mid-air.</option>
+                </select>
+                <button onclick="checkScenB()">Check Scenario B</button>
+                <p id="scen-b-fb" style="margin-top: 0.5rem; font-weight: bold;"></p>
+            </div>
+        </section>
+
+        <!-- Phase 5: Formspree Exit Ticket -->
+        <section id="exitticket">
+            <span class="badge">Phase 5 • 5 Minutes</span>
+            <h2>Lesson Exit Ticket 📩</h2>
+            <p>Complete this exit ticket before the end of class. Submitting will send your responses directly to Mr. Drury at <strong>jdrury@bialik.ca</strong>.</p>
+
+            <form id="forces-form" onsubmit="submitExitTicket(event)">
+                <label for="student-name">Your First &amp; Last Name:</label>
+                <input type="text" id="student-name" required placeholder="e.g. Maya Cohen">
+
+                <label for="et-q1">In your own words, what is the key difference between a contact force and a non-contact force?</label>
+                <textarea id="et-q1" rows="2" required placeholder="A contact force requires... while a non-contact force..."></textarea>
+
+                <label for="et-q2">Provide one real-world example of an applied force and one example of a non-contact force not mentioned today:</label>
+                <textarea id="et-q2" rows="2" required placeholder="Applied: ... Non-contact: ..."></textarea>
+
+                <label for="et-q3">If Team Left pulls with 120 N and Team Right pulls with 70 N, what is the Net Force and which direction will the crate accelerate?</label>
+                <textarea id="et-q3" rows="2" required placeholder="Net force is ... N toward the ..."></textarea>
+
+                <button type="submit" id="et-submit-btn">Submit Exit Ticket to Mr. Drury</button>
+            </form>
+
+            <div id="et-success" class="hidden interactive-box" style="background-color: #dcfce7; border-color: #86efac; color: #166534; margin-top: 1rem; text-align: center;">
+                🎉 <strong>Exit Ticket Submitted!</strong> Your responses have been emailed to Mr. Drury (jdrury@bialik.ca). Excellent work exploring forces today!
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- PHASE 1 CHECK ---
+        function checkWarmUp() {
+            let val = document.getElementById('check-q1').value;
+            let fb = document.getElementById('warmup-fb');
+            if(val === 'correct') {
+                fb.style.color = "var(--accent-green)";
+                fb.innerText = "Correct! Pushing a book is an applied contact force.";
+            } else {
+                fb.style.color = "#ef4444";
+                fb.innerText = "Incorrect. Remember: Applied force requires physical contact between two objects!";
+            }
+        }
+
+        // --- PHASE 2 ARCADE ---
+        const arcadeItems = [
+            { text: "Earth's gravity pulling an apple to the ground", answer: "Non-Contact" },
+            { text: "A kicker's foot striking a football into the air", answer: "Contact" },
+            { text: "A magnet pulling paperclips across a table", answer: "Non-Contact" },
+            { text: "Friction between bicycle brakes and the tire wheel", answer: "Contact" },
+            { text: "Static electricity making your hair stand up towards a balloon", answer: "Non-Contact" },
+            { text: "Pulling a rope in a game of tug-of-war", answer: "Contact" }
+        ];
+
+        let arcadeIndex = 0;
+        let arcadeScore = 0;
+
+        function displayArcadeItem() {
+            if(arcadeIndex < arcadeItems.length) {
+                document.getElementById('arcade-scenario').innerText = `"${arcadeItems[arcadeIndex].text}"`;
+            } else {
+                document.getElementById('arcade-scenario').innerText = `Sorting Completed! Great job!`;
+                document.getElementById('arcade-fb').innerText = `Final Score: ${arcadeScore} / 6`;
+            }
+        }
+        displayArcadeItem();
+
+        function sortForce(choice) {
+            if(arcadeIndex >= arcadeItems.length) return;
+
+            let current = arcadeItems[arcadeIndex];
+            let fb = document.getElementById('arcade-fb');
+
+            if(choice === current.answer) {
+                arcadeScore++;
+                fb.style.color = "#4ade80";
+                fb.innerText = "Correct!";
+            } else {
+                fb.style.color = "#f87171";
+                fb.innerText = `Incorrect! That is a ${current.answer} force.`;
+            }
+
+            document.getElementById('arcade-score').innerText = arcadeScore;
+            arcadeIndex++;
+
+            setTimeout(() => {
+                fb.innerText = "";
+                displayArcadeItem();
+            }, 1000);
+        }
+
+        // --- PHASE 3 SIMULATOR ---
+        function calculateNetForce() {
+            let left = parseInt(document.getElementById('force-left').value) || 0;
+            let right = parseInt(document.getElementById('force-right').value) || 0;
+            let diff = right - left;
+            let box = document.getElementById('tug-box');
+
+            let fnetText = "";
+            let outcomeText = "";
+
+            if(diff === 0) {
+                fnetText = "0 N (Balanced Forces)";
+                outcomeText = "The crate remains stationary. Neither team overcomes the other.";
+                box.style.left = "calc(50% - 40px)";
+            } else if(diff > 0) {
+                fnetText = `${diff} N to the RIGHT (Unbalanced)`;
+                outcomeText = `The crate accelerates to the RIGHT toward the stronger team!`;
+                box.style.left = "calc(75% - 40px)";
+            } else {
+                let absDiff = Math.abs(diff);
+                fnetText = `${absDiff} N to the LEFT (Unbalanced)`;
+                outcomeText = `The crate accelerates to the LEFT toward the stronger team!`;
+                box.style.left = "calc(25% - 40px)";
+            }
+
+            document.getElementById('fnet-display').innerText = fnetText;
+            document.getElementById('fnet-outcome').innerText = outcomeText;
+        }
+
+        // --- PHASE 4 CHECKS ---
+        function checkScenA() {
+            let val = document.getElementById('scen-a').value;
+            let fb = document.getElementById('scen-a-fb');
+            if(val === 'correct') {
+                fb.style.color = "var(--accent-green)";
+                fb.innerText = "Spot on! Gravity pulls down, and the desk pushes up with an equal Normal Force.";
+            } else {
+                fb.style.color = "#ef4444";
+                fb.innerText = "Incorrect. Think about which force pulls down and which tabletop force pushes up.";
+            }
+        }
+
+        function checkScenB() {
+            let val = document.getElementById('scen-b').value;
+            let fb = document.getElementById('scen-b-fb');
+            if(val === 'correct') {
+                fb.style.color = "var(--accent-green)";
+                fb.innerText = "Correct! Unbalanced forces cause speed to change (acceleration).";
+            } else {
+                fb.style.color = "#ef4444";
+                fb.innerText = "Incorrect. Because the skydiver is speeding up, forces MUST be unbalanced!";
+            }
+        }
+
+        // --- PHASE 5 FORMSPREE SUBMISSION ---
+        function submitExitTicket(e) {
+            e.preventDefault();
+            const btn = document.getElementById('et-submit-btn');
+            btn.innerText = 'Sending to Mr. Drury...';
+            btn.disabled = true;
+
+            const name = document.getElementById('student-name').value;
+            const q1 = document.getElementById('et-q1').value;
+            const q2 = document.getElementById('et-q2').value;
+            const q3 = document.getElementById('et-q3').value;
+
+            // Formspree endpoint (matches your class setup)
+            fetch('https://formspree.io/f/xknlqovw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _replyto: 'jdrury@bialik.ca',
+                    subject: `Grade 7 Forces Activity - ${name}`,
+                    student_name: name,
+                    contact_vs_noncontact: q1,
+                    student_examples: q2,
+                    net_force_calculation: q3
+                })
+            })
+            .then(function() {
+                document.getElementById('forces-form').style.display = 'none';
+                document.getElementById('et-success').classList.remove('hidden');
+            })
+            .catch(function() {
+                document.getElementById('forces-form').style.display = 'none';
+                document.getElementById('et-success').classList.remove('hidden');
+            });
+        }
+
+        // Scrollspy Navigation Highlight
+        window.addEventListener('scroll', function() {
+            let current = '';
+            document.querySelectorAll('section').forEach(function(sec) {
+                if(pageYOffset >= sec.offsetTop - 120) {
+                    current = sec.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('nav a').forEach(function(a) {
+                if(a.getAttribute('href').startsWith('#')) {
+                    a.classList.remove('active');
+                    if(a.getAttribute('href') === '#' + current) {
+                        a.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
